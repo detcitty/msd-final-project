@@ -1,9 +1,10 @@
 Devin
+
 Anant
 
-# Project Ideas
-
-Music
+Project Ideas
+---------
+## Music
 
 #### Proposal
 
@@ -11,10 +12,10 @@ Music
 
 ###### Sources
 Lyric API
--https://developer.musixmatch.com/documentation
--https://genius.com/developers
+* -https://developer.musixmatch.com/documentation
+* -https://genius.com/developers
 
 Music
--https://developer.spotify.com/web-api/
+* -https://developer.spotify.com/web-api/
 
 
