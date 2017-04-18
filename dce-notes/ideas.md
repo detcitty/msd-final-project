@@ -20,9 +20,10 @@
 ## Questions for Activities and Moods
 
 Google search for music preferences mood datasets
-    Project Description
+
+#### Project Description
    1. Moods and activities in music
-      Classification:
+        Classification:
         What moods are most common with different music genres. The dataset has songs 
 
 See index.md for dataset descriptions
