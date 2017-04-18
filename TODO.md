@@ -21,7 +21,7 @@ Music
 
 Saturday, April 15, 2017
 ####
-1. Decided artists
+1. Decide artists
    1. One random artists and from one specific genre
 2. Get Spotify information of artists
 3. Compile datasets
