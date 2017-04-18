@@ -10,6 +10,7 @@ source: https://github.com/plamere/spotipy
 import spotipy
 import csv
 import sys
+import time
 
 sp = spotipy.Spotify()
 limit = 20
@@ -25,4 +26,4 @@ with open(csv_file, newline='\n') as csvfile:
         results = sp.search(artist, limit)
         for i, t in enumerate(results['tracks']['items']):
             print(' ', i, t['name'])
-
+        time.sleep(15)
