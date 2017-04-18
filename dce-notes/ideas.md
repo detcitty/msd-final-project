@@ -16,3 +16,16 @@
 ### Questions
 1. Could we make claims about current music charts?
 2. What classification models can we use?
+
+## Questions for Activities and Moods
+
+Google search for music preferences mood datasets
+    Project Description
+   1. Moods and activities in music
+      Classification:
+        What moods are most common with different music genres. The dataset has songs 
+
+See index.md for dataset descriptions
+
+
+
