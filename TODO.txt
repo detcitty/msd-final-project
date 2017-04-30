@@ -1,0 +1,22 @@
+TODO
+
+1. Exploratory data analysis
+  > Most famous songs
+  > Most popular artists(circles)
+  > Average time spent by songs by year
+  > Songs launched per year
+  > Genre distribution changes every year
+   
+2. Spotify WEB API
+  > Extract audio features for a given song
+  
+3. Modeling
+  > Linear Regression
+  
+  
+-----------------------------
+
+REPORT
+
+
+PRESENTATION
