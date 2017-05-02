@@ -1,0 +1,19 @@
+This is a list of all the potential features we will use to construct our linear regression.
+
+1. audio analysis (from spotify API) - these may be split into discrete buckets
+   > tatum: shortest common time interval
+   > beat: preferred human tapping tempo
+   > bar: length of rhythmic pattern
+   > tempo: speed at which section of music is played
+
+2. lyrics (scraped from music match) - these may be put into a document term matrix 
+
+3. number of tracks by a given artist that have already been on the charts
+
+4. album information (from spotify API) 
+   - label: record label 
+   - album type: single or full album? 
+   - launch day: day, month, year (could interact with album genre) 
+   - genre 
+
+5. audio features (from spotify API)
