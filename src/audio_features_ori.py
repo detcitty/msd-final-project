@@ -13,17 +13,16 @@ client_credentials_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 sp.trace=False
 
-infile  = open("track_uri.txt","r")
-data = infile.readlines()
-infile.close()
+if len(sys.argv) > 1:
+    artist_name = ' '.join(sys.argv[1:])
+else:
+    artist_name = 'metallica'
 
-for i in range(2):
-    track_uri = data[i].split("|")[1].split(":")[-1]
-    print(track_uri)
-    feature = sp.audio_features(str(track_uri))[0]
-    print(feature)
-    raw_input()
-
+results = sp.search(q=artist_name, limit=50)
+tids = []
+for i, t in enumerate(results['tracks']['items']):
+    print(' ', i, t['name'])
+    tids.append(t['uri'])
 
 start = time.time()
 features = sp.audio_features(tids)
