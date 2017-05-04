@@ -8,9 +8,9 @@ data = infile.readlines()
 infile.close()
 num_songs = len(data)
 
-outfile = open("track_uri.txt", 'w')
+outfile = open("track_uri_2.txt", 'w')
 
-for i in range(num_songs):
+for i in range(8864, num_songs):
     name = data[i].strip()
     results = spotify.search(q='track:'+name, type='track')
     items = results['tracks']['items']
