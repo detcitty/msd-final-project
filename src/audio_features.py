@@ -56,6 +56,7 @@ for i in range(len(data)):
         feature_elements[e] = str(feature_elements[e])
     feature_string = "|".join(feature_elements)
     feature_string += "\n"
+   
     outfile.write(feature_string) 
     
     print(feature_string)
@@ -69,7 +70,7 @@ outfile.close()
 #for f in features:
 #    print(f)
 
-start = time.time()
+#start = time.time()
 #features = sp.audio_features(tids)
 #for feature in features: 
 #    print(json.dumps(feature, indent=4))
