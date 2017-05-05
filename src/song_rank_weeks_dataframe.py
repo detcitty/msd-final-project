@@ -6,10 +6,10 @@ data = infile.readlines()
 infile.close()
 
 songs, ranks, weeks = [], [], []
-for i in range(5):
+for i in range(len(data)):
     songs.append(data[i].split('|')[0])
-    ranks.append(int(data[i].split('|')[1]))
-    weeks.append(int(data[i].split('|')[2].rstrip()))
+    ranks.append(data[i].split('|')[1])
+    weeks.append(data[i].split('|')[2].rstrip())
 
 song_ranks_weeks = pd.DataFrame({'songs':songs, 'ranks':ranks, 'weeks':weeks})
 print list(song_ranks_weeks)
