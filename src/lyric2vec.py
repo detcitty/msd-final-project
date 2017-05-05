@@ -46,4 +46,5 @@ def get_lyric_dict():
     for i in range(len(names)):
         lyric_dict[names[i]] = dtm[i]
 
-    return lyric_dict
+    names = [n.rstrip() for n in names]
+    return lyric_dict, names

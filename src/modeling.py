@@ -4,7 +4,6 @@ from pandas.stats.api import ols
 from sklearn.preprocessing import MinMaxScaler
 from sklearn import linear_model
 from sklearn.metrics import mean_squared_error
-import rpy2
 
 #################################################################################
 #TRACK_URI DATAFRAME
@@ -96,14 +95,33 @@ for i in range(18):
 #minor changes
 audio_analysis_df.rename(columns={'col_0':'uri'}, inplace=True)
 
-print audio_analysis_df.dtypes
-print list(audio_analysis_df)
+#print audio_analysis_df.dtypes
+#print list(audio_analysis_df)
 
 ###############################################################################
 
+
+from lyric2vec import get_lyric_dict
+
+lyric_dict, names= get_lyric_dict()
+#print type(lyric_dict)
+lyric_dict_df = pd.DataFrame.from_dict(data=lyric_dict,orient='index')
+
+indices = lyric_dict_df.index.values.tolist()
+indices = [i.rstrip() for i in indices]
+lyric_dict_df['song'] = indices
+
+##############################################################################
+
+
 uri_songs_weeks_df = pd.merge(track_uri_df, song_ranks_weeks, on='song', how='inner')
-final_df = pd.merge(uri_songs_weeks_df, audio_features, on='uri', how='inner')
+print 'uri_song_weeks_df: ', len(uri_songs_weeks_df)
+temp_df = pd.merge(uri_songs_weeks_df, lyric_dict_df, on="song", how="inner")
+print 'temp_df: ', len(temp_df)
+final_df = pd.merge(temp_df, audio_features, on='uri', how='inner')
+print 'final_df', len(final_df)
 final_analysis_df = pd.merge(final_df, audio_analysis_df, on='uri', how="inner")
+print 'final_analysis_df', len(final_analysis_df)
 #Removing week to predict rank, will remove rank to predict week later
 final_analysis_df.drop('week', axis=1, inplace=True)
 print list(final_analysis_df)
@@ -118,6 +136,7 @@ drop_columns = ['song','uri','danceability','speechiness','instrumentalness','va
 final_analysis_df.drop(drop_columns, axis=1, inplace=True)
 final_analysis_df = final_analysis_df.apply(pd.to_numeric, errors="ignore")
 print final_analysis_df.dtypes
+print len(final_analysis_df)
 
 predictor_columns = ['acousticness','energy','key','loudness','mode','tempo']
 #scaler = MinMaxScaler()
@@ -125,6 +144,13 @@ predictor_columns = ['acousticness','energy','key','loudness','mode','tempo']
 for i in range(1,18):
     predictor_columns.append(header_names[i])
 print final_analysis_df[predictor_columns]
+for col in list(lyric_dict_df):
+    if col != "song": 
+        predictor_columns.append(col)
+
+
+#for i in range(5000):
+#    predictor_columns.append(lyric_dict_df.columns.values)
 res = ols(y=final_analysis_df['rank'], x=final_analysis_df[predictor_columns])
 print res
 
