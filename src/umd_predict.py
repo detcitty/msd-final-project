@@ -1,6 +1,13 @@
 import numpy as np
 import pandas as pd
 
+def is_int(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
+
 #Reading song names file
 infile = open("song_names.txt")
 song_names = infile.readlines()
@@ -21,6 +28,9 @@ for i in range(len(song_names)):
     #print song
     for j in range(len(database)):
         if database[j].find(song) != -1:
+            if is_int(database[j].split('|')[-3]) == False or is_int(database[j].split('|')[-2])  == False:
+                print 'couldn\'t convert to int'
+                break
             line = song + '|' + database[j].split('|')[-3] + '|' + database[j].split('|')[-2]
             print line
             outfile.write(line+'\n') 
