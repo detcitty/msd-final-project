@@ -73,6 +73,9 @@ start = 0
 
 albums_list = [] 
 
+# track index
+ti = 0
+
 for i in range(intervals): 
     if limit > len(album_ids):
         limit = len(album_ids)
@@ -104,51 +107,16 @@ for i in range(len(albums_list)):
 
         for e in range(len(album_elements)):
             album_elements[e] = str(album_elements[e])
-        album_string = "|".join(album_elements)
+        album_string = str(tids[ti])
+        album_string += "|"
+        album_string += "|".join(album_elements)
         album_string+="\n"
+  
+        ti += 1
 
         outfile.write(album_string)
         print(album_string) 
     
-
-    
-#    print(analysis_url)
-#    track_uri = unicode(("spotify:track:" + track_uri).strip('\n'))
-#    print(track_uri)
-#    tids.append(track_uri)
-#    print("line ",str(i) )
-#    print(tids)
-#    feature = sp.audio_features(str(track_uri))[0]
-
-    
-#    analysis = sp._get(analysis_url)
-#    print()
-#    print(json.dumps(analysis['track'], indent = 4))
-#    print()
-
-
-
-# raw_input()
 outfile.close()
 
-#features = sp.audio_features(tids)
-#for f in features:
-#    print(f)
 
-#start = time.time()
-#features = sp.audio_features(tids)
-#for feature in features: 
-#    print(json.dumps(feature, indent=4))
-#    print()   
-#    analysis = sp._get(feature['analysis_url'])
-#    print(json.dumps(analysis, indent=4))
-    #print(feature)
-#raw_input()
-#delta = time.time() - start
-#for feature in features:
-#    print(json.dumps(feature, indent=4))
-#    print()
-#    analysis = sp._get(feature['analysis_url'])
-#    print(json.dumps(analysis, indent=4))
-#    print()
-#print ("features retrieved in %.2f seconds" % (delta,))

@@ -4,6 +4,7 @@ from pandas.stats.api import ols
 from sklearn.preprocessing import MinMaxScaler
 from sklearn import linear_model
 from sklearn.metrics import mean_squared_error
+import rpy2
 
 #################################################################################
 #TRACK_URI DATAFRAME
