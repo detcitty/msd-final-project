@@ -16,7 +16,7 @@ with open(file_open) as f:
         track = line[4]
         artist = line[5]
 
-        file_lyrics = track.replace(" ", "_") + "_" + artist.replace(" ", "_").replace("/", "") + ".txt"
+        file_lyrics = track.lower() +"*"+ ".txt"
 
         if(os.path.isfile(file_lyrics)):
             continue
@@ -25,7 +25,7 @@ with open(file_open) as f:
                 chart = matcher.track(q_track=track, q_artist=artist)
                 ly = chart.lyrics()
 
-                with open(file_lyrics, "w+") as s:
+                with open("./output/" + file_lyrics, "w+") as s:
                     lyric = ly['lyrics_body']
 
                     s.write(lyric.encode('utf-8'))
