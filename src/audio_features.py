@@ -1,4 +1,3 @@
-
 # shows acoustic features for tracks for the given artist
 
 from __future__ import print_function    # (at top of module)
@@ -23,15 +22,13 @@ tids = []
 # write to this file
 outfile = open("audio_features.txt", "w") 
 
-
-# first two uris, fetch uris
+# for all uris fetch features
 for i in range(len(data)):
     track_uri = data[i].split("|")[1].split(":")[-1]
     track_uri = unicode(("spotify:track:" + track_uri).strip('\n'))
     print(track_uri)
     tids.append(track_uri)
     print("line ",str(i) )
-#    print(tids)
     feature = sp.audio_features(str(track_uri))[0]
 
     feature_elements = [feature["track_href"],
@@ -61,29 +58,5 @@ for i in range(len(data)):
     
     print(feature_string)
     
-
-
-# raw_input()
 outfile.close()
 
-#features = sp.audio_features(tids)
-#for f in features:
-#    print(f)
-
-#start = time.time()
-#features = sp.audio_features(tids)
-#for feature in features: 
-#    print(json.dumps(feature, indent=4))
-#    print()   
-#    analysis = sp._get(feature['analysis_url'])
-#    print(json.dumps(analysis, indent=4))
-    #print(feature)
-#raw_input()
-#delta = time.time() - start
-#for feature in features:
-#    print(json.dumps(feature, indent=4))
-#    print()
-#    analysis = sp._get(feature['analysis_url'])
-#    print(json.dumps(analysis, indent=4))
-#    print()
-#print ("features retrieved in %.2f seconds" % (delta,))
