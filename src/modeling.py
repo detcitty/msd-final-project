@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from pandas.stats.api import ols
+import rpy2
 
 #################################################################################
 #TRACK_URI DATAFRAME

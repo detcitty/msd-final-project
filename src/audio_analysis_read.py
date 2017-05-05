@@ -2,11 +2,11 @@
 # pass in file path 
 # returns list of audio_analysis dictionaries of string keys and values
 
-def read_audio_analysiss(filename): 
+def read_audio_analysis(filename): 
     infile = open(filename, "r")
     data = infile.readlines()
     infile.close()
-    audio_analysis = []
+    audio_analyses = []
 
     for i in range(2): 
         elements = data[i].split("|")
@@ -29,28 +29,9 @@ def read_audio_analysiss(filename):
         audio_analysis["num_samples"] = elements[15]
         audio_analysis["loudness"] = elements[16]
 
+        audio_analyses.append(audio_analysis) 
 
-        analysis["track"]["mode_confidence"],
-        analysis["track"]["end_of_fade_in"],
-        analysis["track"]["key_confidence"],
-        analysis["track"]["synch_version"],
-        analysis["track"]["duration"],
-        analysis["track"]["rhythm_version"],
-        analysis["track"]["time_signature_confidence"],
-        analysis["track"]["start_of_fade_out"],
-        analysis["track"]["analysis_sample_rate"],
-        analysis["track"]["tempo"],
-        analysis["track"]["offset_seconds"],
-        analysis["track"]["tempo_confidence"],
-        analysis["track"]["key"],
-        analysis["track"]["mode"],
-        analysis["track"]["time_signature"],
-        analysis["track"]["num_samples"],
-        analysis["track"]["loudness"]
-
-        audio_analysis.append(audio_analysis) 
-
-    return audio_analysis
+    return audio_analyses
         
     
 
