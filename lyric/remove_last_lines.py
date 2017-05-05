@@ -1,20 +1,13 @@
 import os
-
-path_name = "db_lyrics/"
-
-
+import glob
+path_name = "./db_lyrics/*.txt"
+output_path = "./output_lyrics/"
 numline=3 #3 lines to skip
 
-for (dirpath, dirnames, filenames) in walk("."+path_name):
-        
-    with open(filenames,"w+") as o:
 
-    for i in range(numline):
-    f.next()
-    for line in f:
-        if p:
-            o.write(p)
-    p=line
-    f.close()
-    o.close()
-    print(os.listdir("."))
+
+for f in glob.glob(path_name):
+    lines = open(f).readlines()
+    open(f, 'w').writelines(lines[:-4])
+    
+    
