@@ -2,7 +2,7 @@ import os
 import glob
 
 
-# path_name = "./db_lyrics/*.txt"
+
 output_path = "./output_lyrics/"
 path_name = "./output/*.txt"
 
