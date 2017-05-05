@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from pandas.stats.api import ols
 
 #################################################################################
 #TRACK_URI DATAFRAME
@@ -15,6 +16,7 @@ for i in range(len(data)):
 
 track_uris = [s.split(':')[2] for s in track_uris]
 track_uri_df = pd.DataFrame({'uri':track_uris, 'song':track_names})
+print track_uri_df.dtypes
 #################################################################################
 
 #################################################################################
@@ -29,7 +31,10 @@ for i in range(len(data)):
     ranks.append(data[i].split('|')[1])
     weeks.append(data[i].split('|')[2].rstrip())
 
+#ranks = [float(r) for r in ranks]
+#weeks = [float(w) for w in weeks]
 song_ranks_weeks = pd.DataFrame({'song':songs, 'rank':ranks, 'week':weeks})
+print song_ranks_weeks.dtypes
 ################################################################################
 
 ################################################################################
@@ -50,6 +55,7 @@ audio_features.drop('type', axis=1, inplace=True)
 audio_features.drop('id', axis=1, inplace=True)
 
 audio_features['uri'] = audio_features['uri'].apply(lambda x: x.split(':')[-1])
+print audio_features.dtypes
 ###############################################################################
 
 #track_uri_df
@@ -57,4 +63,23 @@ audio_features['uri'] = audio_features['uri'].apply(lambda x: x.split(':')[-1])
 #audio_features
 uri_songs_weeks_df = pd.merge(track_uri_df, song_ranks_weeks, on='song', how='inner')
 final_df = pd.merge(uri_songs_weeks_df, audio_features, on='uri', how='inner')
-print final_df
+#Removing week to predict rank, will remove rank to predict week later
+final_df.drop('rank', axis=1, inplace=True)
+print list(final_df)
+
+cols = [col for col in final_df.columns if col not in ['rank']]
+print cols
+
+#Changing datatypes of dataframe columns
+final_df.drop('song', axis=1, inplace=True)
+final_df.drop('uri', axis=1, inplace=True)
+final_df.drop('danceability', axis=1, inplace=True)
+final_df.drop('instrumentalness', axis=1, inplace=True)
+final_df.drop('speechiness', axis=1, inplace=True)
+final_df.drop('valence', axis=1, inplace=True)
+final_df.drop('liveness', axis=1, inplace=True)
+final_df = final_df.apply(pd.to_numeric, errors="ignore")
+print final_df.dtypes
+
+res = ols(y=final_df['week'], x=final_df[['acousticness','energy','key','loudness','mode','tempo']])
+print res

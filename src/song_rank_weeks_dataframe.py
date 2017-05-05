@@ -11,6 +11,10 @@ for i in range(len(data)):
     ranks.append(data[i].split('|')[1])
     weeks.append(data[i].split('|')[2].rstrip())
 
+#for i in range(len(data)):
+#    print ranks[i], weeks[i]
+#    print int(ranks[i]), int(weeks[i])
+
 song_ranks_weeks = pd.DataFrame({'songs':songs, 'ranks':ranks, 'weeks':weeks})
 print list(song_ranks_weeks)
 print song_ranks_weeks[:2]
