@@ -26,6 +26,3 @@ def read_albums(filename):
         albums.append(album) 
 
     return albums
-        
-    
-
