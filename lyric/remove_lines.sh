@@ -3,5 +3,6 @@
 
 
 for i in db_lyrics/*; do
-    awk '{l[NR] = $0} END {for (i=1; i<=NR-3; i++) print l[i]}' i > i
+    print $i
+    awk '{l[NR] = $0} END {for (i=1; i<=NR-3; i++) print l[i]}' "$i" > output/"$i"
 done
