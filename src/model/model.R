@@ -29,6 +29,10 @@ colnames(audio_features) <- names
 audio_features <- audio_features %>%
   separate(uri, into=c("spotify", "track_rep", "uri"), sep=":")
 
+drops <- c("spotify", "track_rep", "type", "track_href", "analysis_url",
+           "id", "mode")
+audio_features$uri <- as.factor(audio_features$uri)
+audio_features <- audio_features[, !(names(audio_features) %in% drops)]
 
 uri_songs_weeks_df <- track_uri_df %>%
   inner_join(song_ranks_weeks, by="song")
@@ -37,13 +41,18 @@ final_df <- uri_songs_weeks_df %>%
   inner_join(audio_features, by='uri')
 
 
-
-model <- lm(week ~ acousticness + energy + key + loudness + mode + tempo, 
+model <- lm(week ~ acousticness + energy + key + loudness + tempo, 
             data=final_df)
 
-summary(model)
+sqrt(mean(model$residuals^2))
+sqrt(sum(model$residuals))
 
+summary(model)
 invResPlot(model)
+
+
+all_model <- lm(week ~ . , data=final_df)
+
 
 model <- lm(week ~ acousticness + energy + key + loudness + mode + tempo, 
             data=final_df)
